@@ -7,4 +7,4 @@ def new_deck () :
                 card = m + l
                 deck.append (card)
     return deck
-print(new_deck())
+print(new_deck () )

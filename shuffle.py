@@ -8,4 +8,3 @@ def shuffle():
         card = (f"{rank} of {suit}")
         i += 1
         print(card)
-print(shuffle())

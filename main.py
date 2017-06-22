@@ -17,8 +17,19 @@ def shuffle_deck(deck):
     random.shuffle(deck)
 
 
+# players - number of players
+players = 5
+
+def issue_cards(players, deck):
+    players_cards = []
+    for number in range(players):
+        player = deck[number:players*6:players]
+        players_cards.append(player)
+    return players_cards
+    
 deck = create_new_deck()
 print(deck)
 print(len(deck))
 shuffle_deck(deck)
 print(deck)
+print(issue_cards(players, deck))

@@ -20,16 +20,23 @@ def shuffle_deck(deck):
 # players - number of players
 players = 5
 
+
 def issue_cards(players, deck):
     players_cards = []
     for number in range(players):
         player = deck[number:players*6:players]
         players_cards.append(player)
     return players_cards
-    
+
+
+def display_card(players_cadr):
+    for card in players_cadr[0]:
+        print(card, end=" ")
+
+
 deck = create_new_deck()
 print(deck)
 print(len(deck))
 shuffle_deck(deck)
 print(deck)
-print(issue_cards(players, deck))
+display_card(issue_cards(players, deck))

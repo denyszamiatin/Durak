@@ -29,8 +29,8 @@ def issue_cards(players, deck):
     return players_cards
 
 
-def display_card(players_cadr):
-    for card in players_cadr[0]:
+def display_card(players_cards):
+    for card in players_cards[0]:
         print(card, end=" ")
 
 

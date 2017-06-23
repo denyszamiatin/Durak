@@ -24,7 +24,7 @@ def trump():
 print('Trump is',trump())
 
 
-"""           
+
 # players - number of players
 players = 5
 
@@ -48,4 +48,3 @@ print(len(deck))
 # Shuffle function is already done.
 shuffle_deck(deck)
 print(deck)
-"""

@@ -45,6 +45,6 @@ def display_card(players_cards):
 deck = create_new_deck()
 print(deck)
 print(len(deck))
-# Shuffle function is already done.
 shuffle_deck(deck)
 print(deck)
+

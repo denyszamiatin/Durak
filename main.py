@@ -15,7 +15,16 @@ def create_new_deck():
 
 def shuffle_deck(deck):
     random.shuffle(deck)
-    print(deck)
+
+# Took MykhayloSharapov code and wrote it as a function
+def trump():
+    t=random.randint(0,3)
+    trump = SUITS[t]
+    return trump
+print('Trump is',trump())
+
+
+"""           
 # players - number of players
 players = 5
 
@@ -39,4 +48,4 @@ print(len(deck))
 # Shuffle function is already done.
 shuffle_deck(deck)
 print(deck)
-display_card(issue_cards(players, deck))
+"""

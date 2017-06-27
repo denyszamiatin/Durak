@@ -1,13 +1,14 @@
 import random
 
 # Unicode characters for suits
-SUITS = [u'\u2660', u'\u2665', u'\u2666', u'\u2663']
+SUITS = [u'\u2660', u'\u2663', u'\u2666', u'\u2665']
 RANKS = ['6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A']
+ISSUE = 6
 
 
-def create_new_deck():
+def create_new_deck(suits=SUITS):
     deck = []
-    for suit in SUITS:
+    for suit in suits:
         for rank in RANKS:
             deck.append(suit + rank)
     return deck
@@ -17,56 +18,72 @@ def shuffle_deck(deck):
     random.shuffle(deck)
 
 # players - number of players
-players = 5
+players = 3
 
 
-def issue_cards(players, deck):
+def issue_cards(deck, players_number):
     players_cards = []
-    for number in range(players):
-        player = deck[number:players*6:players]
-        players_cards.append(player)
+    for number in range(players_number):
+        player_cards = deck[:ISSUE]
+        deck = deck[ISSUE:]
+        players_cards.append(player_cards)
     return players_cards
 
 
-def display_card(players_cards):
-    for card in players_cards[0]:
+def display_card(player_cards):
+    for card in player_cards:
         print(card, end=" ")
+    print()
 
 
 deck = create_new_deck()
-print(deck)
-print(len(deck))
+#print(deck)
+#print(len(deck))
 shuffle_deck(deck)
-print(deck)
+#print(deck)
+players_cards = issue_cards(deck, players)
+for card in players_cards:
+    display_card(card)
 
-#Issue 5: select Trump        
 
 def elect_trump():
-    trump = str(deck[35])[0]
-    return str(trump)
+    return deck.pop(-1)
 
 trump = elect_trump()
-print ('Trump is', trump)
+print('Trump is', trump)
 
-# Issue 6: Determine first to play.
-# Let's arrange the deck in the order of human search for the smallets trump on hands.
 
-trumped_SUITS = SUITS[:]
+def rotate_suits(suits, trump):
+    """
+    >>> rotate_suits([0, 1, 2, 3], 2)
+    [2, 3, 0, 1]
+    >>> rotate_suits([0, 1, 2, 3], 0)
+    [0, 1, 2, 3]
+    >>> rotate_suits([0, 1, 2, 3], 3)
+    [3, 0, 1, 2]
+    >>> rotate_suits([0, 1, 2, 3], 4)
+    Traceback (most recent call last):
+    ...
+    ValueError
+    """
+    if trump not in suits:
+        raise ValueError
+    while suits[0] != trump:
+        suits.append(suits[0])
+        suits.pop(0)
+    return suits
 
-i = 0
-while trumped_SUITS [i] != trump:
-        trumped_SUITS.append (trumped_SUITS [i])
-        trumped_SUITS.pop (i)
+trumped_suits = rotate_suits(SUITS[:], trump[0])
+print(trumped_suits)
 
-trumped_deck = []
 
-for i in (trumped_SUITS):
-    for j in (RANKS):
-        trumped_deck.append (i+j)
+def get_first_player():
+    print(create_new_deck(trumped_suits))
+    for card in create_new_deck(trumped_suits):
+        print(card)
+        for player_number, cards in enumerate(players_cards):
+            if card in cards:
+                return player_number
 
-i = 0
-while trumped_deck[i] not in (players_cards):
-    i+=1
 
-print ('First to go is player No',int((players_cards.index (trumped_deck[i])+1)//6.001+1),'!')
-
+print ('First to go is player No', get_first_player())

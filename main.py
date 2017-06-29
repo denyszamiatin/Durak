@@ -73,6 +73,7 @@ def rotate_suits(suits, trump):
         suits.pop(0)
     return suits
 
+
 trumped_suits = rotate_suits(SUITS[:], trump[0])
 print(trumped_suits)
 

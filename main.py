@@ -3,7 +3,7 @@ import random
 # Unicode characters for suits
 SUITS = [u'\u2660', u'\u2663', u'\u2666', u'\u2665']
 RANKS = ['6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A']
-ISSUE = 6
+DEAL = 6
 
 
 def create_new_deck(suits=SUITS):
@@ -21,11 +21,11 @@ def shuffle_deck(deck):
 players = 3
 
 
-def issue_cards(deck, players_number):
+def deal_cards(deck, players_number):
     players_cards = []
     for number in range(players_number):
-        player_cards = deck[:ISSUE]
-        deck = deck[ISSUE:]
+        player_cards = deck[:DEAL]
+        deck = deck[DEAL:]
         players_cards.append(player_cards)
     return players_cards
 
@@ -41,7 +41,7 @@ deck = create_new_deck()
 #print(len(deck))
 shuffle_deck(deck)
 #print(deck)
-players_cards = issue_cards(deck, players)
+players_cards = deal_cards(deck, players)
 for card in players_cards:
     display_card(card)
 

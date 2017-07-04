@@ -4,7 +4,7 @@ import random
 SUITS = [u'\u2660', u'\u2663', u'\u2666', u'\u2665']
 RANKS = ['6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A']
 DEAL = 6
-
+SUIT, RANK =0, 1
 
 def create_new_deck(suits=SUITS):
     deck = []
@@ -89,25 +89,30 @@ def get_first_player():
 
 print ('First to go is player No', get_first_player())
 
-#Assume Issue No 8 provides us with input_card_one and input_card_two
 
-def move(number_player):
-    print('You cards:' , ' '.join(players_cards[number_player]))
-    card_move= input('Enter the card number for the move ') - 1
+def get_player_card(number_player, card_move):
     return players_cards[number_player].pop(card_move)
 
-#until then dummies are:
+
+def move(number_player):
+    print('You cards:', display_card(number_player))
+    card_move = int(input('Enter the card number for the move ')) - 1
+    return get_player_card(number_player, card_move)
+
 move(get_first_player())
 
 
-def consider_trump (input_card_one, input_card_two):
-    if input_card_one[0]==trump[0] and input_card_two [0]!=trump[0]:
-          return True
-    if input_card_one[0]!=trump[0] and input_card_two [0]==trump[0]:
-          return False
-    elif input_card_one[0] != input_card_two [0]:
-            return True
-    else:
-            return RANKS.index (input_card_one[1:]) >RANKS.index (input_card_two[1:])
+def compare_with_trump(card1, card2):
+    return card1[SUIT] == trump[SUIT] and card2[SUIT] != trump[SUIT]
 
-print consider_trump (move(get_first_player()), move(get_first_player()+1))
+
+def consider_trump(card1, card2):
+    if card1[SUIT] == card2[SUIT]:
+        return RANKS.index(card1[RANK:]) > \
+               RANKS.index(card2[RANK:])
+    if card2[SUIT] != trump[SUIT]:
+        raise ValueError
+    return compare_with_trump(card2, card1)
+
+
+print(consider_trump (move(get_first_player()), move(get_first_player()+1)))

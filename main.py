@@ -88,3 +88,20 @@ def get_first_player():
 
 
 print ('First to go is player No', get_first_player())
+
+#Assume Issue No 8 provides us with input_card_one and input_card_two
+#until then dummies are:
+input_card_one = SJ
+input_card_two = SA
+
+def consider_trump (input_card_one, input_card_two):
+    if input_card_one[0]==trump[0] and input_card_two [0]!=trump[0]:
+          return True
+    if input_card_one[0]!=trump[0] and input_card_two [0]==trump[0]:
+          return False
+    elif input_card_one[0] != input_card_two [0]:
+            return True
+    else:
+            return RANKS.index (input_card_one[1:]) >RANKS.index (input_card_two[1:])
+
+print consider_trump (input_card_one, input_card_two)

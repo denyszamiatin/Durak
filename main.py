@@ -90,9 +90,15 @@ def get_first_player():
 print ('First to go is player No', get_first_player())
 
 #Assume Issue No 8 provides us with input_card_one and input_card_two
+
+def move(number_player):
+    print('You cards:' , ' '.join(players_cards[number_player]))
+    card_move= input('Enter the card number for the move ') - 1
+    return players_cards[number_player].pop(card_move)
+
 #until then dummies are:
-input_card_one = SJ
-input_card_two = SA
+move(get_first_player())
+
 
 def consider_trump (input_card_one, input_card_two):
     if input_card_one[0]==trump[0] and input_card_two [0]!=trump[0]:
@@ -104,4 +110,4 @@ def consider_trump (input_card_one, input_card_two):
     else:
             return RANKS.index (input_card_one[1:]) >RANKS.index (input_card_two[1:])
 
-print consider_trump (input_card_one, input_card_two)
+print consider_trump (move(get_first_player()), move(get_first_player()+1))
